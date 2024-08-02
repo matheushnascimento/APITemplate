@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 const path = require("path");
 
 module.exports = {
@@ -13,7 +15,7 @@ module.exports = {
         "src",
         "database",
         "knex",
-        "migrations",
+        "migrations"
       ),
     },
     useNullAsDefault: true,

@@ -1,5 +1,7 @@
-/* eslint-disable no-unused-vars */
+exports.up = (knex) =>
+  knex.schema.createTable("sampleTable", (table) => {
+    table.increments("id");
+    table.string("title");
+  });
 
-exports.up = function (knex) {};
-
-exports.down = function (knex) {};
+exports.down = (knex) => knex.schema.createTable("sampleTable", {});

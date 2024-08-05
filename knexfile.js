@@ -15,7 +15,7 @@ module.exports = {
         "src",
         "database",
         "knex",
-        "migrations"
+        "migrations",
       ),
     },
     useNullAsDefault: true,

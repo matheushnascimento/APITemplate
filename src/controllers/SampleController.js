@@ -1,10 +1,11 @@
-const AppError = require("../utils/AppError");
-
+const SampleService = require("../services/SampleService");
+const SampleRepository = require("../repositories/SampleRepository");
 class SampleController {
   sampleMethod(req, res) {
-    if (!req.body) {
-      throw new AppError("Test AppError", 400);
-    }
+    const sampleRepository = new SampleRepository();
+    const sampleService = new SampleService(sampleRepository);
+
+    sampleService.execute();
 
     console.log("sample method");
     res.status(200).json({ message: "sample method" });

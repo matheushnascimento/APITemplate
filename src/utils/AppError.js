@@ -1,10 +1,10 @@
 class AppError {
-  statusCode;
   message;
+  statusCode;
 
-  constructor(statusCode, message) {
-    this.statusCode = statusCode;
+  constructor(message, statusCode) {
     this.message = message;
+    this.statusCode = statusCode;
   }
 }
 

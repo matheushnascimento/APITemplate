@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const AppError = require("../../utils/AppError");
 
 class CreateUsersService {
@@ -13,7 +14,10 @@ class CreateUsersService {
         throw new AppError("E-mail, já está em uso", 201);
       }
 
-      this.repository.createUser({ name, email, password });
+      const salt = bcrypt.genSaltSync();
+      const hashedPassword = bcrypt.hashSync(password, salt);
+
+      this.repository.createUser({ name, email, password: hashedPassword });
     } catch (error) {
       console.log(error);
     }

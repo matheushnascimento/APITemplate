@@ -1,6 +1,9 @@
 const knex = require("../database/index");
 
 class UsersRepository {
+  async findById(id) {
+    return await knex("users").where({ id }).first();
+  }
   async findByEmail(email) {
     const result = await knex("users").where({ email }).first();
     return result;
@@ -15,8 +18,8 @@ class UsersRepository {
     knex("users").update({ name, email, password }).where({ id });
   }
 
-  async findById(id) {
-    return await knex("users").where({ id }).first();
+  async deleteUser(id) {
+    await knex("users").where({ id }).delete();
   }
 }
 

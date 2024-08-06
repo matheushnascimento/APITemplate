@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const CreateUsersService = require("../services/users/CreateUserService");
 const UpdateUsersService = require("../services/users/UpdateUserService");
+const DeleteUsersService = require("../services/users/DeleteUsersService");
+
 const UsersRepository = require("../repositories/UsersRepository");
 
 class UsersController {
@@ -36,6 +38,15 @@ class UsersController {
     };
 
     await updateUsersService.execute(user);
+    return res.status(200).json();
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+    const usersRepository = new UsersRepository();
+    const deleteUsersService = new DeleteUsersService(usersRepository);
+    await deleteUsersService.execute(id);
+
     return res.status(200).json();
   }
 }

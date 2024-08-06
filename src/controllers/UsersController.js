@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const CreateUsersService = require("../services/users/CreateUserService");
 const UpdateUsersService = require("../services/users/UpdateUserService");
 const DeleteUsersService = require("../services/users/DeleteUsersService");
+const FetchUsersService = require("../services/users/FetchUsersService.js");
 
 const UsersRepository = require("../repositories/UsersRepository");
 
@@ -48,6 +49,17 @@ class UsersController {
     await deleteUsersService.execute(id);
 
     return res.status(200).json();
+  }
+
+  async fetch(req, res) {
+    const { id } = req.params;
+    const usersRepository = new UsersRepository();
+    const fetchUsersService = new FetchUsersService(usersRepository);
+
+    const user = await fetchUsersService.execute(id);
+    delete user.password;
+
+    res.status(200).json(user);
   }
 }
 

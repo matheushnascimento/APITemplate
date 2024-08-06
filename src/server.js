@@ -6,9 +6,10 @@ const AppError = require("./utils/AppError");
 
 const app = express();
 
-app.use(routes);
-
 const port = 3333;
+
+app.use(express.json());
+app.use(routes);
 
 // eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {

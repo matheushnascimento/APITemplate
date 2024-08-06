@@ -5,15 +5,15 @@ class CreateUsersService {
     this.repository = repository;
   }
 
-  async execute({ name, email, password }) {
+  async execute(user) {
     try {
-      const userExists = await this.repository.findByEmail(email);
+      const updatedUser = await this.repository.findById(user.id);
 
-      if (userExists) {
-        throw new AppError("E-mail, já está em uso", 201);
+      if (!updatedUser) {
+        throw new AppError("Usuário não encontrado", 404);
       }
 
-      await this.repository.createUser({ name, email, password });
+      await this.repository.updateUser(user);
     } catch (error) {
       console.log(error);
       throw error;
